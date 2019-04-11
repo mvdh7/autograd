@@ -94,6 +94,10 @@ def test_diff():
     combo_check(np.diff, [0])([R(1), R(1,1)], axis=[0])
     combo_check(np.diff, [0])([R(1,1), R(3,1)], axis=[1])
 
+def test_gradient():
+    combo_check(np.gradient, [0])([R(5,5), R(5,5,5)], axis=[None,0,1,-1])
+    combo_check(np.gradient, [0])([R(5,5,5)], axis=[(0, 1), (0, -1)])
+
 def test_tile():
     combo_check(np.tile, [0])([R(2,1,3,1)], reps=[(1, 4, 1, 2)])
     combo_check(np.tile, [0])([R(1,2)], reps=[(1,2), (2,3), (3,2,1)])
@@ -133,6 +137,7 @@ def test_tensordot_4(): combo_check(np.tensordot, [0, 1], order=3)(
 def test_tensordot_5(): combo_check(np.tensordot, [0, 1], order=3)([R(4)], [R()], axes=[0])
 def test_tensordot_6(): combo_check(np.tensordot, [0, 1], order=3)([R(2,6)], [R(6,3)], axes=[[[-1], [0]]])
 def test_tensordot_7(): combo_check(np.tensordot, [0, 1], order=3)([R(2,6)], [R(6,3)], axes=[[-1, 0]])
+def test_tensordot_8(): combo_check(np.tensordot, [0, 1], order=3)([R(2)], [R(2,2)], axes=[[0, 1]])
 
 # Need custom tests because gradient is undefined when arguments are identical.
 def test_maximum(): combo_check(np.maximum, [0, 1])(
